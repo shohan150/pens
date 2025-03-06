@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- generalized container with flex and center aligned. places the contant at center -->
     <div class="container">
+      <!-- the main content with fixed width, height that is placed center. But the width, height (simply the content size) is changed for smaller screen using scale. Has an animation that applies filter. -->
       <div class="content" style="display: block; width: 1000px; height: 562px">
+        <!-- the full container that keeps growing but the extra growth is hidden. -->
         <div class="container-full">
+          <!-- setup the hue overlay -->
           <div class="animated hue"></div>
+          <!-- images -->
           <img
             class="backgroundImage"
             src="https://drive.google.com/thumbnail?id=1_ZMV_LcmUXLsRokuz6WXGyN9zVCGfAHp&sz=w1920"
@@ -20,6 +25,8 @@
             class="boyImage"
             src="https://drive.google.com/thumbnail?id=1eGqJskQQgBJ67myGekmo4YfIVI3lfDTm&sz=w1920"
           />
+
+          <!-- the moving texts -->
           <div class="container">
             <div class="cube">
               <div class="face top"></div>
