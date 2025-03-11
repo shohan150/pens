@@ -11,10 +11,11 @@
     <!-- generalized container with flex and center aligned. places the contant at center -->
     <div class="container">
       <!-- the main content with fixed width, height that is placed center. But the width, height (simply the content size) is changed for smaller screen using scale. Has an animation that applies filter. -->
-      <div class="content" style="display: block; width: 1000px; height: 562px">
-        <!-- the full container that keeps growing but the extra growth is hidden. -->
+      <div class="content">
+        <!-- IMPORTANT TAKE : Overflow -->
+        <!-- the full container that keeps growing but the extra growth is hidden. How is that? The content has fixed width and height and an initial scale that only changes depending on window size. So, for a fixed window size, the div.content has fixed size with overflow hidden. Now, inside it place the container-full with the zoom-in animation. Now as time passes, the .container-full is scaledd bigger but for overflow hidde on .content, the extra part is not seen.as a result we get a zoom in effect. If you select the .container-full on elements tab, you'll see it's size going continuously.  even scrollbar does not arise on page as it's overflow is hidden. That maens even after the size of the .container-full exceeding the window size, and it keeps calculating even after the that much extension/overflow, that effect is not visible to user as not scrollbar appears. but, on elments tab. you can see the element far overflowing. -->
         <div class="container-full">
-          <!-- setup the hue overlay -->
+          <!-- setup the hue overlay. eta absolute position diye height, width 100% diye ekta div j puro page k cover/overlay kore rakhe. -->
           <div class="animated hue"></div>
           <!-- images -->
           <img
@@ -26,7 +27,7 @@
             src="https://drive.google.com/thumbnail?id=1eGqJskQQgBJ67myGekmo4YfIVI3lfDTm&sz=w1920"
           />
 
-          <!-- the moving texts -->
+          <!-- the moving texts. transform r animation er khela. but code is straigtforward and easy. Complax kichu ba dependency nai. simple code. just available resource k use koreche i er ki. -->
           <div class="container">
             <div class="cube">
               <div class="face top"></div>
