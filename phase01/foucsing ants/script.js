@@ -11,7 +11,7 @@ const followRadius = 150; // the distance at which ants start following the mous
 
 // create the ants
 for (let i = 0; i < numAnts; i++) {
-  const antElem = new DOMParser().parseFromString(ant, 'image/svg+xml').documentElement;
+  const antElem = new DOMParser().parseFromString(ant, 'image/svg+xml').documentElement; // takes an SVG string (stored in the ant variable) and converts it into a DOM element that can be manipulated by JavaScript. Details at the end.
   antElem.style.position = 'absolute';
   antElem.setAttribute('width', `${antSize}px`);  
   antElem.setAttribute('height', `${(antSize * 73 / 46)}px`); // Maintain aspect ratio
@@ -28,6 +28,10 @@ for (let i = 0; i < numAnts; i++) {
     followMouse: false,
   });
 }
+// karon,
+// left: 0; is okay
+// left: 100% is not okay. sejonno, 
+// left: calc(100% - antSize); is okay because it keeps the element visible.
 
 // on mouse move and leave update the mouse co-ordinates
 document.addEventListener('mousemove', (event) => {
@@ -42,10 +46,10 @@ document.addEventListener('mouseout', () => {
 
 function updateAnts() {
   ants.forEach((ant, index) => {
-   //store the change in the ant's x and y coordinates for the current animation frame
     let dx = 0;
     let dy = 0;
 
+    // ant's x and y coordinates for the current animation frame
     const antCenterX = ant.x + antSize / 2;
     const antCenterY = ant.y + (antSize * 73 / 46) / 2; 
 
@@ -54,12 +58,12 @@ function updateAnts() {
     
     if (distanceToMouse <= followRadius) {
       // move towards mouse
-      const randomFactor = 0.01 + Math.random() * 0.01; // Randomize movement speed slightly
+      const randomFactor = 0.01 + Math.random() * 0.01; // Randomize movement speed slightly. This determinues movement speed towards mouse.
       dx = (mousex - antCenterX) * randomFactor; // Move towards the mouse slowly
       dy = (mousey - antCenterY) * randomFactor;
       ant.angle = Math.atan2(dy, dx) * 180 / Math.PI; // Face the mouse
     } else {
-      // random movement logic. Calculate the change in x and y coordinates based on the ant's current angle and speed. Then randomly changes the ant's angle, making it wander.
+      // random movement logic. Calculate the probable change in x and y coordinates based on the ant's current angle and speed. Then randomly changes the ant's angle, making it wander.
       dx = Math.cos(ant.angle * Math.PI / 180) * ant.speed;
       dy = Math.sin(ant.angle * Math.PI / 180) * ant.speed;
       ant.angle += (Math.random() - 0.5) * 10;
@@ -72,7 +76,7 @@ function updateAnts() {
         const otherAntCenterY = otherAnt.y + (antSize * 73 / 46) / 2;
         // Calculates the distance between the current ant and the other ant.
         const dist = Math.sqrt(Math.pow(antCenterX - otherAntCenterX, 2) + Math.pow(antCenterY - otherAntCenterY, 2));
-        // Checks if the other ant is within the avoidRadius. Adjusts the ant's dx and dy to move it away from the other ant.
+        // Checks if the other ant is within the avoidRadius. Calculates a strength factor based on the distance, making the avoidance stronger when ants are closer. Adjusts the ant's dx and dy to move it away from the other ant.
         if (dist < avoidRadius) {
           const avoidStrength = (avoidRadius - dist) / avoidRadius;
           dx -= (otherAntCenterX - antCenterX) / dist * avoidStrength * 3;
@@ -81,10 +85,11 @@ function updateAnts() {
       }
     });
 
+    //Updates the ant's x and y coordinates based on the calculated changes.
     ant.x += dx;
     ant.y += dy;
 
-    // Handle edge collisions
+    // Handle edge collisions. Checks if the ant has moved beyond the screen boundaries. If so, it reverses the ant's angle and clamps its position to stay within the screen.
     if (ant.x < 0 || ant.x > window.innerWidth - antSize || ant.y < 0 || ant.y > window.innerHeight - (antSize * 73 / 46)) {
       ant.angle += 180; // Turn around
       ant.x = Math.max(0, Math.min(ant.x, window.innerWidth - antSize));
@@ -97,8 +102,45 @@ function updateAnts() {
     let angle = ant.angle + 90; // Adjust the rotation
     ant.element.style.transform = `rotate(${angle}deg)`;
   });
-
+   // Schedules the updateAnts function to be called again on the next animation frame, creating the continuous animation loop.
   requestAnimationFrame(updateAnts);
 }
 
 updateAnts();
+
+
+
+// const antElem = new DOMParser().parseFromString(ant, 'image/svg+xml').documentElement;
+
+// SVG code is just a string. To display and manipulate it on a webpage, it needs to be converted into a DOM element that the browser can understand and render.
+// The DOMParser provides a convenient way to perform this conversion.
+
+// Example: If the ant variable contains:
+// const ant = "<svg width='100' height='100'><circle cx='50' cy='50' r='40' fill='red' /></svg>";
+
+// Then, after executing the code, antElem will be a DOM <svg> element that represents the circle. You can then do things like:
+
+// antElem.style.position = 'absolute';
+// antElem.style.left = '100px';
+// document.body.appendChild(antElem);
+
+// This would position the red circle at 100px from the left of the page and add it to the document.
+
+
+// DOMParser is a built-in browser object that allows to parse XML or HTML strings into DOM documents. Then, calls the parseFromString() method of the DOMParser object.
+
+// ant: This is the string containing the SVG code.
+// 'image/svg+xml': This is the MIME type of the content being parsed. It tells the parser that the string contains SVG data.
+// This method parses the SVG string and returns a Document object representing the parsed SVG.
+// .documentElement:
+
+// Accesses the documentElement property of the Document object returned by parseFromString().
+// The documentElement property represents the root element of the parsed document, which in this case is the <svg> element itself.
+// Because the parseFromString method returns a full document, and we only want the svg element, we need to extract that element.
+
+// const antElem = ...: Assigns the resulting <svg> element to the antElem constant.
+// Now, antElem holds a reference to the SVG element, which you can manipulate using JavaScript (e.g., set attributes, styles, append it to the DOM).
+
+
+// In essence, this line of code: Takes the SVG string from the ant variable. Parses it into a DOM <svg> element. Stores that <svg> element in the antElem variable.
+
