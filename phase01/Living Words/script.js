@@ -50,6 +50,7 @@ const contentDiv = document.querySelector(".content");
 function adjustContentSize() {
 	const viewportWidth = window.innerWidth;
 	const baseWidth = 1000;
+	// means 1000px er niche hle, page er width er 80% space nibe div.content.
 	const scaleFactor =
 		viewportWidth < baseWidth ? (viewportWidth / baseWidth) * 0.8 : 1;
 	contentDiv.style.transform = `scale(${scaleFactor})`;

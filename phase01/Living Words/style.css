@@ -35,7 +35,7 @@ body {
 }
 .content {
   border-radius: 40px;
-  animation: 60s linear infinite brightness;
+  animation: 90s linear infinite brightness;
 }
 .container-full,
 .face {
@@ -47,7 +47,7 @@ body {
   margin: 0;
   justify-content: center;
   transform: scale(1);
-  animation: 60s linear infinite zoom-in;
+  animation: 90s linear infinite zoom-in;
 }
 
 /* to be studied */
@@ -78,7 +78,7 @@ body {
   position: absolute;
   width: 1000px;
   z-index: 2;
-  animation: 60s linear infinite blur;
+  animation: 90s linear infinite blur;
 }
 
 .cube,
@@ -90,7 +90,6 @@ body {
   position: relative;
   transform-style: preserve-3d;
   perspective: 480px;
-  transform-style: preserve-3d;
   perspective-origin: 51% 70%;
 }
 .face,
@@ -119,36 +118,51 @@ p {
 span {
   color: red;
 }
+
+/* all face divs are of a same size: 870x190 px. front k z axis borabor samne niye asa hoyeche. jodio tar kono kaj dekhi na. but se back screen theke z axis borabor 435px samne ese kindof full screen jure thake. But eta maay be formality ba good practice hisebe likhe rakhse. Main kaj .back e. to tar oppposite e kichu rakha better se hisebe hoito rekheche.  */
 .front {
   transform: translateZ(435px);
   display: none;
 }
+
+/* back k piche niye screen er sathe fit kore hoyeche translateZ diye. RotateY diye screen k 180deg ghurano hoyeche. https://css-tricks.com/almanac/properties/t/transform/#aa-rotate. Abar scale(-1) diye abar ghurieche. Eta kno korlo thik bujhlam na. But sudhu translateZ dile e code kaj korbe.  */
 .back {
+  /* transform: translateZ(-435px); */
   transform: translateZ(-435px) rotateY(180deg) scaleX(-1);
 }
+
+/* X axis borabor div take side e niye rotate koreche. */
 .left {
+  /* transform: translateX(-435px) rotateY(90deg); */
   transform: translateX(-435px) rotateY(-90deg) scaleX(-1);
 }
 .right {
+  /* transform: translateX(435px) rotateY(-90deg); */
   transform: translateX(435px) rotateY(90deg) scaleX(-1);
 }
 .top {
+  /* transform: translateX(-435px) rotateY(90deg); */
   transform: translateY(-435px) rotateX(90deg) scaleY(-1);
 }
 .bottom {
+  /* transform: translateX(-245px) rotateY(90deg); */
   transform: translateY(-245px) rotateX(-90deg) scaleY(-1);
 }
+
+/* margin-left:480px deyar karon initially ekta look deya j left side empty chilo kichuta. sekhan theke text flow howa shuru korlo.  */
 .left p {
   margin-left: 480px;
-  animation: 60s linear infinite left;
+  animation: 90s linear infinite left;
 }
+
+/* .back r .right er value gulo starting/left side text er sathe match kore j position lage shei position set kora hoyeche. */
 .back p {
   margin-left: -390px;
-  animation: 60s linear infinite back;
+  animation: 90s linear infinite back;
 }
 .right p {
   margin-left: -1260px;
-  animation: 60s linear infinite right;
+  animation: 90s linear infinite right;
 }
 @keyframes left {
   100% {
@@ -174,9 +188,12 @@ span {
   margin-top: 380px;
   filter: blur(10px);
 }
+
+/* value same as main. perspective-origin makes the difference. The perspective-origin property defines at from which position the user is looking at the 3D-positioned element. */
 .container-reflect .cube {
   perspective-origin: 51% -30%;
 }
+
 .container-reflect .back {
   transform: translateZ(-435px) rotateY(180deg) scaleX(-1) scaleY(-1);
 }
@@ -190,6 +207,8 @@ span {
 .container-reflect p {
   transform: scaleY(70%);
 }
+
+/* filter is applied to define/change various visual effects of an element; mostly for images. */
 
 /* hue effect control */
 @keyframes filter-animation {
@@ -208,11 +227,11 @@ span {
     transform: scale(1);
   }
   100% {
-    transform: scale(1.2);
+    transform: scale(1.5);
   }
 }
 
-/* blurs the bou */
+/* blurs the boy */
 @keyframes blur {
   0% {
     filter: blur(0px);
