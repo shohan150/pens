@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Sigmar&family=Poppins:wght@400;800&display=swap");
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background-image: linear-gradient(#121212, #323232);
+}
+.tb {
+  z-index: 99;
+}
+.tb p {
+  display: grid;
+  place-items: center;
+  font-size: 196px;
+  font-family: "Poppins";
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.2);
+  -webkit-text-stroke: 3px #c8c8c8;
+  filter: drop-shadow(8px 8px 2px #000);
+  position: relative;
+}
+.tb p:after {
+  content: "mouseover for ants to follow";
+  font-size: 16px;
+  font-family: serif;
+  -webkit-text-stroke: 0;
+  color: #fff;
+  position: absolute;
+  font-weight: 400;
+  bottom: 0;
+  font-family: "Poppins";
+}
+svg {
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.5));
+  fill: #c83232;
+}
+#tl {
+  transform-origin: center right;
+  animation: lmove 0.25s ease infinite alternate;
+}
+#ml {
+  transform-origin: center right;
+  animation: lmove 0.25s 0.25s ease infinite alternate;
+}
+#bl {
+  transform-origin: center right;
+  animation: lmove 0.25s 0.45s ease infinite alternate;
+}
+#tr {
+  transform-origin: center left;
+  animation: rmove 0.25s 0.15s ease infinite alternate;
+}
+#mr {
+  transform-origin: center left;
+  animation: rmove 0.25s 0.4s ease infinite alternate;
+}
+#br {
+  transform-origin: center left;
+  animation: rmove 0.25s 0.6s ease infinite alternate;
+}
+@media (max-width: 900px) {
+  .tb p {
+    font-size: 98px;
+  }
+  .tb p:after {
+    font-size: 8px;
+  }
+}
+@-moz-keyframes lmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: 10deg;
+  }
+}
+@-webkit-keyframes lmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: 10deg;
+  }
+}
+@-o-keyframes lmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: 10deg;
+  }
+}
+@keyframes lmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: 10deg;
+  }
+}
+@-moz-keyframes rmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: -10deg;
+  }
+}
+@-webkit-keyframes rmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: -10deg;
+  }
+}
+@-o-keyframes rmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: -10deg;
+  }
+}
+@keyframes rmove {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: -10deg;
+  }
+}
