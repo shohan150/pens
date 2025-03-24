@@ -214,19 +214,24 @@ class BugSprayGame {
      window.addEventListener('resize', () => this.initSpawnPoints());
    }
    
-   // Create element helper
+   // Create element helper. Creates HTML elements with various properties and event listeners.
    createEl(tag, options = {}, parent = this.root) {
+    // tag: The HTML tag name (e.g., 'div', 'span', 'button') of which the element to be created.
+    // options: An optional object containing properties to set on the created element (e.g., className, id, style, event listeners). It defaults to an empty object {} if not provided.
+    // parent: An optional DOM element to which the created element will be appended. It defaults to this.root (likely a property of the class containing this function) if not provided.
      const el = document.createElement(tag);
      if (options.className) el.className = options.className;
      if (options.id) el.id = options.id;
      if (options.innerHTML) el.innerHTML = options.innerHTML;
      if (options.textContent) el.textContent = options.textContent;
-     if (options.style) Object.assign(el.style, options.style);
+     if (options.style) Object.assign(el.style, options.style);  // Copies properties from a source object to a target object. Object.assign(target, source);
      if (options.events) {
-       Object.entries(options.events).forEach(([event, handler]) => {
+       Object.entries(options.events).forEach(([event, handler]) => { // Object.entries returns an array of arrays, where each array contains the key/value pairs of an object
          el.addEventListener(event, handler);
        });
      }
+
+     // checking. By default parent is root but in case user sets parent to null/undefined/an elment that does not exist.
      if (parent) parent.appendChild(el);
      return el;
    }
