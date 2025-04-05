@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap");
+
+/* CSS RESET */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+
+  overflow-x: hidden;
+  background-color: #080202;
+  color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 20px 0;
+  font-size: 20px;
+  line-height: 2;
+  font-weight: 200;
+}
+
+img {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+/* CLASS STYLES */
+.main-section {
+  padding: 70px 0;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.img_container {
+  width: 100%;
+  height: 80vh;
+}
+
+.img_container img,
+.tWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.anime_img {
+  object-fit: cover;
+  animation: img_key linear forwards;
+  animation-timeline: view(block);
+  animation-range: cover 0% cover 20%;
+}
+
+.top_img {
+  position: relative;
+}
+
+.top_img img {
+  position: absolute;
+  z-index: -1;
+  animation: fade-out linear forwards;
+  /* animation-timeline that connects animation to scroll */
+  animation-timeline: view();
+  animation-range: exit;
+  top: 0px;
+}
+
+.img_container.top_img {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+section .tWrap {
+  perspective: 1000px;
+}
+
+.box {
+  animation: noTransformAnim linear forwards normal;
+  animation-timeline: view();
+  transform: rotateX(40deg);
+  opacity: 0;
+}
+
+@keyframes noTransformAnim {
+  50% {
+    transform: none;
+    opacity: 1;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes img_key {
+  0% {
+    clip-path: polygon(50% 0, 50% 0, 50% 100%, 50% 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes fade-out {
+  100% {
+    opacity: 0;
+    scale: 1.5;
+  }
+}

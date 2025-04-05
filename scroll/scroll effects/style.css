@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+.card {
+  padding: 2em;
+  width: 50%;
+  height: 100vh;
+  text-align: right;
+  font-size: 1.8rem;
+  position: absolute;
+  top: 100vh;
+  right: 0;
+  transition: top 700ms cubic-bezier(0.25, 0.56, 0.46, 1.04);
+}
+
+article {
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  transition: top 750ms ease;
+  background-size: cover;
+  background-position: center center;
+}
+
+.art1 {
+  top: 0;
+  background-image: url(https://images.unsplash.com/photo-1538951505851-5284cc6dc090?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=23aa5fd4d4dbec7f3bd79360897a6116&auto=format&fit=crop&w=1000&q=80);
+}
+
+.art2 {
+  background-image: url(https://images.unsplash.com/photo-1538970272646-f61fabb3a8a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9ee5e5d6e9ead644548d228059c808ab&auto=format&fit=crop&w=641&q=80);
+}
+
+.art3 {
+  background-image: url(https://images.unsplash.com/photo-1538998073820-4dfa76300194?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e62e20e08deb8a7dc54e776b02101688&auto=format&fit=crop&w=634&q=80);
+}
+
+.sec1 {
+  background-color: #aaa;
+  top: 0;
+}
+
+.sec2 {
+  background-color: #888;
+}
+.sec3 {
+  background-color: #333;
+  color: #aaa;
+}
+.sec4 {
+  background-color: #000;
+  color: #aaa;
+}
+.sec5 {
+  background-color: #fff;
+}
+
+/*scroller*/
+.scroll-container {
+  margin: 100px auto;
+  width: 30px;
+  height: 60px;
+  border: 3px solid #fff;
+  border-radius: 15px;
+  position: relative;
+}
+
+.scroller {
+  width: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  bottom: 34px;
+  animation: scroller 1500ms ease-out infinite;
+}
+
+@keyframes scroller {
+  0% {
+    bottom: 34px;
+  }
+  5% {
+    top: 4px;
+  }
+  32% {
+    bottom: 4px;
+  }
+  66% {
+    top: 34px;
+    bottom: 4px;
+  }
+  100% {
+    top: 4px;
+    bottom: 34px;
+  }
+}
