@@ -60,13 +60,6 @@ img {
   object-position: center;
 }
 
-.anime_img {
-  object-fit: cover;
-  animation: img_key linear forwards;
-  animation-timeline: view(block);
-  animation-range: cover 0% cover 20%;
-}
-
 .top_img {
   position: relative;
 }
@@ -75,9 +68,11 @@ img {
   position: absolute;
   z-index: -1;
   animation: fade-out linear forwards;
-  /* animation-timeline that connects animation to scroll */
+  /* forwards: This sets the animation-fill-mode to forwards. It means that when the animation finishes, the element will retain the styles applied by the last keyframe of the animation. */
   animation-timeline: view();
+  /* animation-timeline that connects animation to scroll. This is the crucial part that links the animation to the scroll position. view() creates a scroll-driven animation timeline. The progress of the animation is directly tied to the visibility of the element within the viewport (the visible area of the browser window). */
   animation-range: exit;
+  /* This property, used in conjunction with animation-timeline: view(), defines the range of the animation's progress. This keyword means the animation will play as the element leaves the viewport. The animation will start when the element begins to move out of the viewport and will complete when the element is fully outside the viewport. */
   top: 0px;
 }
 
@@ -87,14 +82,28 @@ img {
   align-items: flex-end;
 }
 
+.anime_img {
+  object-fit: cover;
+  animation: img_key linear forwards;
+  animation-timeline: view();
+  animation-range: cover 0% cover 20%;
+  /* Start the animation as soon as the element begins to become visible in the viewport (the beginning of the 'cover' range) and finish the animation when the element has progressed 20% through its entire visibility cycle (from just entering to completely exiting the 'cover' range). 
+  
+  It determines at what point along the animation timeline (which is linked to scrolling in this case; view()) the animation should begin and end. cover: tracks the visibility of the element within its scroll container. The cover range spans from the moment the element starts entering the viewport until the moment it has completely left the viewport. 0% (after the first cover): This value specifies the starting point of the animation within the cover range. 0% indicates the very beginning of the cover range, meaning the animation will start as soon as the element begins to enter the viewport. The second cover specifies the ending point of the animation within the cover range. 20% means the animation will complete when the element has progressed 20% through its visibility journey from just entering to fully being outside the viewport. */
+}
+
 section .tWrap {
   perspective: 1000px;
+  /* defines how far the object is away from the user. So, a lower value will result in a more intensive 3D effect than a higher value. When defining the perspective property for an element, it is the CHILD elements that get the perspective view, NOT the element itself. 
+  
+  1000px * 40deg is same as 100px * 4deg. So, in this case, the perspective value is a multiplier of the angle. The higher the perspective value, the less intense the 3D effect will be.
+  */
 }
 
 .box {
   animation: noTransformAnim linear forwards normal;
   animation-timeline: view();
-  transform: rotateX(40deg);
+  transform: rotateX(80deg);
   opacity: 0;
 }
 
